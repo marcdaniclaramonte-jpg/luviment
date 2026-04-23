@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumivent – Ventanas y Cerramientos en Vila-real</title>
+  <meta name="description" content="Instalación profesional de ventanas de aluminio, PVC, cerramientos de cristal, persianas y puertas en Vila-real, Castellón. Pide tu presupuesto gratis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1B3A5C;
+      --navy-dark: #122840;
+      --navy-light: #24507e;
+      --gray-light: #F5F5F5;
+      --gray-mid: #e0e4e8;
+      --white: #ffffff;
+      --text-dark: #1a1a2e;
+      --text-muted: #5a6a7a;
+      --wa-green: #25D366;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(27,58,92,0.10);
+      --shadow-hover: 0 8px 36px rgba(27,58,92,0.18);
+      --transition: 0.28s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── NAVBAR ─── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(27,58,92,0.97);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0 5%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.18);
+      transition: background var(--transition);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--white);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-icon i {
+      color: var(--navy);
+      font-size: 20px;
+    }
+    .nav-logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+    .nav-logo-text span {
+      color: #7eb8f7;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition);
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+    }
+
+    .nav-cta {
+      background: var(--wa-green) !important;
+      color: var(--white) !important;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover {
+      background: #1ebe5d !important;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0; right: 0;
+      background: var(--navy);
+      padding: 16px 5% 24px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 12px 16px;
+      border-radius: 8px;
+      transition: background var(--transition);
+    }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.1); }
+    .mobile-menu .nav-cta {
+      background: var(--wa-green) !important;
+      color: var(--white) !important;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(27,58,92,0.90) 0%, rgba(27,58,92,0.72) 50%, rgba(18,40,64,0.88) 100%),
+        url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      padding: 120px 5% 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.92);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(4px);
+    }
+    .hero-badge i { color: #7eb8f7; font-size: 12px; }
+
+    .hero-title {
+      font-size: clamp(36px, 5.5vw, 62px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 22px;
+    }
+    .hero-title span { color: #7eb8f7; }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2.2vw, 19px);
+      color: rgba(255,255,255,0.80);
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 540px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--wa-green);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    }
+    .btn-wa:hover {
+      background: #1ebe5d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37,211,102,0.45);
+    }
+    .btn-wa i { font-size: 18px; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 15px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.40);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 56px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hero-stat strong {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-stat span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 400;
+    }
+    .hero-stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.2);
+      align-self: stretch;
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 96px 5%; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: rgba(27,58,92,0.08);
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    .section-header { margin-bottom: 56px; }
+
+    /* ─── SERVICIOS ─── */
+    #servicios { background: var(--gray-light); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 30px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--navy);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+      transform-origin: left;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(27,58,92,0.08);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+    .service-card:hover .service-icon { background: rgba(27,58,92,0.14); }
+    .service-icon i {
+      font-size: 26px;
+      color: var(--navy);
+    }
+
+    .service-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--wa-green);
+      color: var(--white);
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      width: fit-content;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .service-link:hover {
+      background: #1ebe5d;
+      transform: translateX(2px);
+    }
+    .service-link i { font-size: 15px; }
+
+    /* ─── POR QUÉ ELEGIRNOS ─── */
+    #porque {
+      background: var(--white);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+    }
+
+    .why-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 32px 28px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--gray-mid);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .why-card:hover {
+      border-color: var(--navy);
+      box-shadow: var(--shadow);
+    }
+
+    .why-icon {
+      width: 54px;
+      height: 54px;
+      background: var(--navy);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .why-icon i {
+      font-size: 22px;
+      color: var(--white);
+    }
+
+    .why-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .why-card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ─── RESEÑAS ─── */
+    #resenas { background: var(--gray-light); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+    }
+
+    .review-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+    .review-stars i {
+      font-size: 16px;
+      color: #F4B400;
+    }
+    .review-stars span {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: 6px;
+    }
+
+    .review-text {
+      font-size: 15px;
+      color: #3a4a5a;
+      line-height: 1.7;
+      font-style: italic;
+    }
+    .review-text::before { content: '"'; font-size: 40px; color: var(--navy); line-height: 0; vertical-align: -18px; margin-right: 4px; font-style: normal; }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .review-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .review-author-info strong {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: block;
+    }
+    .review-author-info span {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* Google badge */
+    .google-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+    }
+    .google-badge img {
+      width: 18px;
+      height: 18px;
+    }
+    .google-g {
+      width: 22px;
+      height: 22px;
+      background: #4285F4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    /* ─── CTA FINAL ─── */
+    #cta-final {
+      background: var(--navy);
+      text-align: center;
+      padding: 96px 5%;
+    }
+
+    .cta-final-inner { max-width: 640px; margin: 0 auto; }
+
+    #cta-final .section-tag {
+      color: #7eb8f7;
+      background: rgba(126,184,247,0.15);
+    }
+
+    #cta-final .section-title { color: var(--white); }
+
+    #cta-final .section-subtitle {
+      color: rgba(255,255,255,0.72);
+      max-width: 100%;
+      margin: 0 auto 40px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.80);
+      padding: 64px 5% 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .nav-logo { margin-bottom: 16px; display: inline-flex; }
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.62);
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .footer-contact-item i {
+      color: #7eb8f7;
+      font-size: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .footer-contact-item p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.55;
+    }
+    .footer-contact-item a {
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-contact-item a:hover { color: var(--white); }
+
+    .footer-map {
+      border-radius: 10px;
+      overflow: hidden;
+      width: 100%;
+      height: 200px;
+      border: 1px solid rgba(255,255,255,0.10);
+      margin-top: 8px;
+    }
+    .footer-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(0.3) invert(0.85) hue-rotate(180deg);
+      opacity: 0.9;
+    }
+
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      margin-bottom: 28px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ─── FLOATING WHATSAPP ─── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 2000;
+      width: 60px;
+      height: 60px;
+      background: var(--wa-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.50);
+      transition: transform var(--transition), box-shadow var(--transition);
+      animation: wa-pulse 2.5s infinite;
+    }
+    .wa-float:hover {
+      transform: scale(1.10);
+      box-shadow: 0 8px 32px rgba(37,211,102,0.60);
+      animation: none;
+    }
+    .wa-float i {
+      font-size: 30px;
+      color: var(--white);
+    }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.50); }
+      50% { box-shadow: 0 4px 30px rgba(37,211,102,0.75), 0 0 0 8px rgba(37,211,102,0.12); }
+    }
+
+    .wa-float-tooltip {
+      position: absolute;
+      right: 70px;
+      background: var(--navy-dark);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .wa-float-tooltip::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 6px solid transparent;
+      border-left-color: var(--navy-dark);
+      border-right: 0;
+    }
+    .wa-float:hover .wa-float-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      section { padding: 72px 5%; }
+      .hero-stats { gap: 24px; }
+      .hero-stat-divider { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .wa-float { bottom: 20px; right: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content { padding: 100px 5% 64px; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .btn-wa, .btn-outline { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#inicio">
+      <div class="nav-logo-icon">
+        <i class="fa-solid fa-window-maximize"></i>
+      </div>
+      <span class="nav-logo-text">Lumi<span>vent</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#porque">Por qué nosotros</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li>
+        <a class="nav-cta" href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20un%20presupuesto%20sin%20compromiso" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> Presupuesto
+        </a>
+      </li>
+    </ul>
+
+    <div class="nav-hamburger" id="hamburger" aria-label="Menú" role="button">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio" class="mobile-link">Inicio</a>
+    <a href="#servicios" class="mobile-link">Servicios</a>
+    <a href="#porque" class="mobile-link">Por qué nosotros</a>
+    <a href="#resenas" class="mobile-link">Reseñas</a>
+    <a href="#contacto" class="mobile-link">Contacto</a>
+    <a class="nav-cta mobile-link" href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20un%20presupuesto%20sin%20compromiso" target="_blank" rel="noopener">
+      <i class="fa-brands fa-whatsapp"></i> Pedir presupuesto
+    </a>
+  </div>
+
+  <!-- ─── HERO ─── -->
+  <section id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <i class="fa-solid fa-location-dot"></i>
+        Vila-real, Castellón
+      </div>
+      <h1 class="hero-title reveal reveal-delay-1">
+        Transforma tu hogar<br>con ventanas de <span>calidad</span>
+      </h1>
+      <p class="hero-subtitle reveal reveal-delay-2">
+        Instalación profesional de ventanas y cerramientos en Vila-real. Asesoramiento personalizado y presupuesto sin compromiso.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a class="btn-wa"
+           href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20un%20presupuesto%20sin%20compromiso"
+           target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i>
+          PIDE TU PRESUPUESTO GRATIS
+        </a>
+        <a class="btn-outline" href="#servicios">
+          <i class="fa-solid fa-arrow-down"></i> Ver servicios
+        </a>
+      </div>
+      <div class="hero-stats reveal reveal-delay-4">
+        <div class="hero-stat">
+          <strong>100%</strong>
+          <span>Satisfacción garantizada</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <strong>5★</strong>
+          <span>Valoración media</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <strong>Rápido</strong>
+          <span>Presupuesto en 24h</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICIOS ─── -->
+  <section id="servicios">
+    <div class="section-header reveal">
+      <div class="section-tag">Nuestros servicios</div>
+      <h2 class="section-title">Todo lo que necesita tu hogar</h2>
+      <p class="section-subtitle">Soluciones completas en aluminio, PVC y cristal con instalación profesional.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon"><i class="fa-solid fa-house-chimney-window"></i></div>
+        <h3>Ventanas de aluminio y PVC</h3>
+        <p>Alta eficiencia energética, aislamiento térmico y acústico superior. Amplísimo catálogo de acabados y colores.</p>
+        <a class="service-link"
+           href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20info%20sobre%20ventanas"
+           target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> Consultar
+        </a>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon"><i class="fa-solid fa-border-all"></i></div>
+        <h3>Cerramientos de cristal</h3>
+        <p>Galerías, terrazas y espacios exteriores transformados en zonas habitables con cristal templado de seguridad.</p>
+        <a class="service-link"
+           href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20info%20sobre%20cerramientos%20de%20cristal"
+           target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> Consultar
+        </a>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon"><i class="fa-solid fa-blinds"></i></div>
+        <h3>Persianas y estores</h3>
+        <p>Persianas enrollables, venecianas y estores de calidad para un control perfecto de la luz y privacidad.</p>
+        <a class="service-link"
+           href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20info%20sobre%20persianas"
+           target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> Consultar
+        </a>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-icon"><i class="fa-solid fa-door-closed"></i></div>
+        <h3>Puertas y accesos</h3>
+        <p>Puertas de entrada, correderas y de garaje. Seguridad, diseño y durabilidad en cada instalación.</p>
+        <a class="service-link"
+           href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20info%20sobre%20puertas"
+           target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> Consultar
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── POR QUÉ ELEGIRNOS ─── -->
+  <section id="porque">
+    <div class="section-header reveal">
+      <div class="section-tag">Por qué elegirnos</div>
+      <h2 class="section-title">La diferencia Lumivent</h2>
+      <p class="section-subtitle">Más de un compromiso con la calidad en cada instalación que realizamos.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon"><i class="fa-solid fa-star"></i></div>
+        <h3>Instalación impecable</h3>
+        <p>Equipo de instaladores profesionales con experiencia en todo tipo de ventanas y cerramientos. Limpieza y acabado perfectos.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon"><i class="fa-solid fa-bolt"></i></div>
+        <h3>Presupuesto rápido</h3>
+        <p>Visita sin compromiso y presupuesto detallado en menos de 24 horas. Sin letras pequeñas ni sorpresas.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon"><i class="fa-solid fa-tag"></i></div>
+        <h3>Precios competitivos</h3>
+        <p>Materiales de primera calidad al mejor precio del mercado. Financiación flexible adaptada a tus necesidades.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-4">
+        <div class="why-icon"><i class="fa-solid fa-headset"></i></div>
+        <h3>Atención personalizada</h3>
+        <p>Te asesoramos desde el primer contacto hasta la postventa. Cada proyecto recibe nuestra atención total.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RESEÑAS ─── -->
+  <section id="resenas">
+    <div class="section-header reveal">
+      <div class="section-tag">Reseñas reales</div>
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-subtitle">Valoración 5 sobre 5 estrellas en Google. La satisfacción de nuestros clientes habla por nosotros.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span>5/5</span>
+        </div>
+        <p class="review-text">Sin duda la mejor elección para mejorar nuestra casa. Hemos cambiado todas las ventanas y es increíble la diferencia, tanto para invierno como para verano.</p>
+        <div class="review-author">
+          <div class="review-avatar">A</div>
+          <div class="review-author-info">
+            <strong>Aida Albero</strong>
+            <span>Clienta verificada</span>
+          </div>
+          <div class="google-badge">
+            <div class="google-g">G</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span>5/5</span>
+        </div>
+        <p class="review-text">Desde el primer contacto transmiten seriedad y profesionalidad. Nos asesoraron con paciencia sobre el tipo de ventanas que mejor se adaptaban a nuestra situación.</p>
+        <div class="review-author">
+          <div class="review-avatar">P</div>
+          <div class="review-author-info">
+            <strong>Pol TP</strong>
+            <span>Cliente verificado</span>
+          </div>
+          <div class="google-badge">
+            <div class="google-g">G</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-3">
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span>5/5</span>
+        </div>
+        <p class="review-text">Muy buen trato y rápidos para medir y hacer presupuesto. Precios competitivos.</p>
+        <div class="review-author">
+          <div class="review-avatar">A</div>
+          <div class="review-author-info">
+            <strong>Andrea</strong>
+            <span>Clienta verificada</span>
+          </div>
+          <div class="google-badge">
+            <div class="google-g">G</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA FINAL ─── -->
+  <section id="cta-final">
+    <div class="cta-final-inner">
+      <div class="section-tag reveal">Actúa ahora</div>
+      <h2 class="section-title reveal reveal-delay-1">¿Listo para mejorar tu hogar?</h2>
+      <p class="section-subtitle reveal reveal-delay-2">
+        Contáctanos hoy y recibe tu presupuesto personalizado sin compromiso. Instalamos en Vila-real y toda la comarca de la Plana Baixa.
+      </p>
+      <a class="btn-wa reveal reveal-delay-3"
+         href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20un%20presupuesto%20sin%20compromiso"
+         target="_blank" rel="noopener"
+         style="margin: 0 auto;">
+        <i class="fa-brands fa-whatsapp"></i>
+        PRESUPUESTO SIN COMPROMISO
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer id="contacto">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#inicio">
+          <div class="nav-logo-icon">
+            <i class="fa-solid fa-window-maximize"></i>
+          </div>
+          <span class="nav-logo-text" style="color:white;">Lumi<span>vent</span></span>
+        </a>
+        <p>Ventanas y cerramientos de calidad instalados con profesionalidad. Tu hogar, nuestra especialidad.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp"></i>
+          <p><a href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20un%20presupuesto" target="_blank" rel="noopener">670 365 168</a></p>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <p>Av. Francesc Tàrrega 47<br>Vila-real, Castellón</p>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-clock"></i>
+          <p>Lunes – Viernes<br>Mañanas y tardes</p>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Cómo llegar</h4>
+        <div class="footer-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3080.5!2d-0.1001!3d39.9352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5ff8b6b6b6b6b6b%3A0x0!2sAv.%20Francesc%20T%C3%A0rrega%2047%2C%20Vila-real!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lumivent - Av. Francesc Tàrrega 47, Vila-real">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <p>© 2025 Lumivent Ventanas y Cerramientos. Todos los derechos reservados.</p>
+      <p>Vila-real, Castellón</p>
+    </div>
+  </footer>
+
+  <!-- ─── FLOATING WHATSAPP ─── -->
+  <a class="wa-float"
+     href="https://wa.me/34670365168?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20un%20presupuesto"
+     target="_blank"
+     rel="noopener"
+     aria-label="Contactar por WhatsApp">
+    <span class="wa-float-tooltip">¡Escríbenos!</span>
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // ─── HAMBURGER MENU ───
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // ─── SCROLL REVEAL ───
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Hero elements visible immediately
+    document.querySelectorAll('#inicio .reveal').forEach(el => {
+      el.classList.add('visible');
+    });
+
+    // ─── NAVBAR SCROLL EFFECT ───
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 60) {
+        navbar.style.background = 'rgba(27,58,92,1)';
+      } else {
+        navbar.style.background = 'rgba(27,58,92,0.97)';
+      }
+    });
+
+    // ─── SMOOTH SCROLL FOR NAV LINKS ───
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = 70;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
